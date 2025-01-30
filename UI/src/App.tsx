@@ -14,6 +14,7 @@ body {
 
 const CenterDiv = styled.div`
 background-color: white;
+border-radius: 5%;
 width: 800px;
 height: 500px;
 display: flex;
@@ -26,10 +27,12 @@ text-align: center; /* Center text */
 function App() {
 
   const [Meigen, setMeigen] = useState(""); // This should be inside the App function
+  const [author, setAuthor] = useState("");
 
   const getMeigen = async () => {
       const res = await axios.get("http://localhost:3001/");
-      setMeigen(res.data[Math.floor(Math.random() * 50)].quote)
+      setMeigen(res.data[Math.floor(Math.random() * 50)].quote);
+      setAuthor(res.data[Math.floor(Math.random() * 50)].author);
      
   };
   
@@ -37,9 +40,10 @@ function App() {
     <>
       <GlobalStyle />
       <CenterDiv>
-        <h1>今日を頑張るあなたに</h1>
+        <h1>今日の名言</h1>
         <button onClick={getMeigen}>See the Quote</button>
         <p>{Meigen ? Meigen: "loading"}</p>
+        <p>{author ? author : "loading"}</p>
 
       </CenterDiv>
     </>
