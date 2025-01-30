@@ -1,9 +1,10 @@
-import { styled, createGlobalStyle } from "styled-components";
-import axios from "axios";
-import { useState } from "react";
+import {createGlobalStyle } from "styled-components";
+import Home from "./components/Home";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import MeigenList from "./components/MeigenList";
 const GlobalStyle = createGlobalStyle`
 body {
-  background-color: #141619;
+  background-color: rgba(20, 22, 25, 0.89);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,40 +13,22 @@ body {
 }
 `;
 
-const CenterDiv = styled.div`
-background-color: white;
-border-radius: 5%;
-width: 800px;
-height: 500px;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column; /* This will center the text and button properly */
-text-align: center; /* Center text */
-`;
+
 
 function App() {
 
-  const [Meigen, setMeigen] = useState(""); // This should be inside the App function
-  const [author, setAuthor] = useState("");
-
-  const getMeigen = async () => {
-      const res = await axios.get("http://localhost:3001/");
-      setMeigen(res.data[Math.floor(Math.random() * 50)].quote);
-      setAuthor(res.data[Math.floor(Math.random() * 50)].author);
-     
-  };
+  
   
   return (
     <>
+    <BrowserRouter>
       <GlobalStyle />
-      <CenterDiv>
-        <h1>今日の名言</h1>
-        <button onClick={getMeigen}>See the Quote</button>
-        <p>{Meigen ? Meigen: "loading"}</p>
-        <p>{author ? author : "loading"}</p>
-
-      </CenterDiv>
+      
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/meigenlist" element={<MeigenList />} />
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }
