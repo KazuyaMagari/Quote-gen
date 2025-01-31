@@ -26,8 +26,9 @@ app.get('/', async(req, res) => {
 app.post("/favorites", async (req, res) => {
     const {quote} = req.body;
     const quoteRes = await Quote.find({quote: quote})
-    console.log(quoteRes)
+    res.json('quoteRes')
 })
+
 
 app.listen(3001, (req, res) =>{
 
