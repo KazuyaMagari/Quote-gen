@@ -27,7 +27,7 @@ app.get('/', async(req, res) => {
 app.post("/favorites", async (req, res) => {
     const {quote} = req.body;
     const quoteRes = await Quote.find({quote: quote})
-    // console.log(quoteRes);
+    // res.json('quoteRes');
     const ListFavo = new List({
         quote: quoteRes[0].quote,
         author: quoteRes[0].author
@@ -39,6 +39,7 @@ app.get("/favorites", async (req, res) =>{
     const lists = await List.find();
     res.json(lists);
 })
+
 
 app.listen(3001, (req, res) =>{
 

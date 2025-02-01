@@ -54,7 +54,7 @@ function Home() {
                   お気に入り登録
                 </button>
               
-              
+              <br/>
               <br />
     </CenterMain>
     </>
