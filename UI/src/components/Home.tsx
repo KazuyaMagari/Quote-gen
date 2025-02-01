@@ -17,7 +17,6 @@ flex-direction: column; /* This will center the text and button properly */
 text-align: center; /* Center text */
 `;
 
-
 function Home() {
     const [Meigen, setMeigen] = useState(""); // This should be inside the App function
   const [author, setAuthor] = useState("");
@@ -30,11 +29,14 @@ function Home() {
   };
   const addToFavorites = async () => {
     try {
-      await axios.post("http://localhost:3001/favorites", {
+      console.log("add to favorite")
+       await axios.post("http://localhost:3001/favorites", {
         quote: Meigen,
         author: author,
       });
+
       alert("お気に入りに追加しました！");
+      // setFavorites([...favorites, res.data.data]);
     } catch (error) {
       console.error("Error adding to favorites:", error);
     }
@@ -48,9 +50,11 @@ function Home() {
               <p>{Meigen ? Meigen : "loading"}</p>
               <p>{author ? author : "loading"}</p>
               <br />
-              <button onClick={addToFavorites} disabled={!Meigen || !author}>
-                お気に入り登録
-              </button>
+                <button type="submit" onClick={addToFavorites} disabled={!Meigen || !author}>
+                  お気に入り登録
+                </button>
+              
+              
               <br />
     </CenterMain>
     </>
