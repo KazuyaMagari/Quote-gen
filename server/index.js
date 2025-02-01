@@ -4,6 +4,7 @@ const cors = require("cors")
 const corsOption = {origin: "http://localhost:5173",  methods: "GET,POST", // Allow GET and POST requests
     allowedHeaders: "Content-Type,Authorization",   };
 const Quote = require("../server/schemas/QuoteShemas");
+const List = require("./schemas/ListSchema")
 const mongoose = require("mongoose");
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); // 
@@ -26,7 +27,17 @@ app.get('/', async(req, res) => {
 app.post("/favorites", async (req, res) => {
     const {quote} = req.body;
     const quoteRes = await Quote.find({quote: quote})
-    console.log(quoteRes)
+    // console.log(quoteRes);
+    const ListFavo = new List({
+        quote: quoteRes[0].quote,
+        author: quoteRes[0].author
+    });
+    await ListFavo.save();
+});
+
+app.get("/favorites", async (req, res) =>{
+    const lists = await List.find();
+    res.json(lists);
 })
 
 app.listen(3001, (req, res) =>{
