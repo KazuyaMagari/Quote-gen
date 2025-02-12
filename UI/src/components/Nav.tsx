@@ -35,7 +35,7 @@ function Nav() {
             <div>
                 <ul className="right">
                     <Link to="/Meigenlist">お気に入り名言リスト</Link>
-                    <li>名言を作る</li>
+                    <Link to="/Form">名言を作る</Link>
                 </ul>
             </div>
         </Navigation>
