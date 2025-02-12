@@ -25,6 +25,9 @@ function MeigenList() {
   return (
     <div style={{height: "100vh"}}>
       <h1>お気に入りリスト</h1>
+      <form action="/" method="GET">
+        <button>戻る</button>
+      </form>
       {favorites.length === 0 ? (
         <p>お気に入りはまだありません。</p>
       ) : (
