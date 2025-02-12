@@ -33,6 +33,7 @@ app.post("/favorites", async (req, res) => {
         author: quoteRes[0].author
     });
     await ListFavo.save();
+    res.json({messages: "success"})
 });
 
 app.get("/favorites", async (req, res) =>{
@@ -40,6 +41,17 @@ app.get("/favorites", async (req, res) =>{
     res.json(lists);
 })
 
+app.post("/form", async (req, res) => {
+    const {quote, author} = req.body;
+    const List = new Quote({
+        quote: quote,
+        author: author
+    })
+    await List.save();
+    console.log("data saved", List)
+    res.status(200).json({ message: "データが正常に保存されました！"});
+
+})
 
 app.listen(3001, (req, res) =>{
 
